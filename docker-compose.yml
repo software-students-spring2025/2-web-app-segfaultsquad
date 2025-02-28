@@ -1,0 +1,26 @@
+# docker-compose.yml
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=seg_fault
+      - MONGO_INITDB_ROOT_PASSWORD=seg_fault_pw
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
