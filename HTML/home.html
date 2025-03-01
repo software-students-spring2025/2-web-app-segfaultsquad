@@ -1,46 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home - Grocery Scout</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Welcome to Grocery Scout</h1>
-        <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="{{ url_for('store_search') }}">Explore Stores</a>
-            <a href="{{ url_for('favorite_stores') }}">Favorite Stores</a>
-            <a href="{{ url_for('logout') }}">Log Out</a>
-        </nav>
+    <link rel="stylesheet" href="../styles/css/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Welcome to Grocery Scout</h1>
+      <nav class="nav">
+        <a class="nav__link" href="{{ url_for('home') }}">Home</a>
+        <a class="nav__link" href="{{ url_for('store_search') }}"
+          >Explore Stores</a
+        >
+        <a class="nav__link" href="{{ url_for('favorite_stores') }}"
+          >Favorites</a
+        >
+        <a class="nav__link" href="{{ url_for('logout') }}">Log Out</a>
+      </nav>
     </header>
 
-    <main>
-        <section id="food-guessing">
-            <h2>Guess the Price of This Item</h2>
-            <img src="{{ url_for('static', filename='images/food_item.jpg') }}" alt="Food Item Image">
-            <p>How much do you think this item costs?</p>
+    <main class="main-content">
+      <section class="game-section">
+        <h2 class="section-title">Guess the Price of This Item</h2>
+        <img
+          class="food-image"
+          src="{{ url_for('static', filename='images/food_item.jpg') }}"
+          alt="Food Item Image"
+        />
+        <p class="game-prompt">How much do you think this item costs?</p>
 
-            <form action="{{ url_for('submit_guess') }}" method="POST">
-                <input type="number" id="guess" name="guess" placeholder="Enter your guess" required>
-                <button type="submit">Submit Guess</button>
-            </form>
+        <form
+          class="guess-form"
+          action="{{ url_for('submit_guess') }}"
+          method="POST"
+        >
+          <div class="form-group">
+            <input
+              type="number"
+              id="guess"
+              name="guess"
+              class="form-input"
+              placeholder="Enter your guess"
+              required
+              step="0.01"
+            />
+          </div>
+          <button type="submit" class="submit-button">Submit Guess</button>
+        </form>
 
-            <p id="result"></p> <!-- This will show the result after submission -->
-        </section>
+        <p class="result-message" id="result"></p>
+      </section>
 
-        <section id="explore-stores">
-            <p>Ready to explore grocery stores?</p>
-            <a href="{{ url_for('store_list') }}">
-                <button>Explore Stores</button>
-            </a>
-        </section>
+      <section class="cta-section">
+        <p class="cta-text">Ready to explore grocery stores?</p>
+        <a href="{{ url_for('store_list') }}" class="cta-button">
+          Explore Stores
+        </a>
+      </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Grocery Quest</p>
+    <footer class="footer">
+      <p class="footer__text">&copy; 2025 Grocery Quest</p>
     </footer>
-</body>
+  </body>
 </html>

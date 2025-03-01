@@ -1,44 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add New Store - Grocery Quest</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Add a New Store</h1>
-        <nav>
-            <nav>
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="{{ url_for('store_search') }}">Explore Stores</a>
-                <a href="{{ url_for('favorite_stores') }}">Favorite Stores</a>
-                <a href="{{ url_for('logout') }}">Log Out</a>
-            </nav>
-        </nav>
+    <link rel="stylesheet" href="../styles/css/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Add a New Store</h1>
+      <nav class="nav">
+        <a href="{{ url_for('home') }}" class="nav__link">Home</a>
+        <a href="{{ url_for('store_search') }}" class="nav__link">Explore</a>
+        <a href="{{ url_for('favorite_stores') }}" class="nav__link"
+          >Favorites</a
+        >
+        <a href="{{ url_for('logout') }}" class="nav__link">Log Out</a>
+      </nav>
     </header>
 
-    <main>
-        <form action="{{ url_for('add_store') }}" method="POST" enctype="multipart/form-data">
-            <label for="name">Store Name:</label>
-            <input type="text" id="name" name="name" required>
+    <main class="main-content">
+      <form
+        class="store-form"
+        action="{{ url_for('add_store') }}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label for="name" class="form-label">Store Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-input"
+            required
+          />
+        </div>
 
-            <label for="description">Store Description:</label>
-            <textarea id="description" name="description" required></textarea>
+        <div class="form-group">
+          <label for="description" class="form-label">Store Description</label>
+          <textarea
+            id="description"
+            name="description"
+            class="form-textarea"
+            required
+          ></textarea>
+        </div>
 
-            <label for="image">Store Image:</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
+        <div class="form-group">
+          <label for="image" class="form-label">Store Image</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            class="form-file"
+            accept="image/*"
+            required
+          />
+        </div>
 
-            <label for="location">Store Location:</label>
-            <input type="text" id="location" name="location" required>
+        <div class="form-group">
+          <label for="location" class="form-label">Store Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            class="form-input"
+            required
+          />
+        </div>
 
-            <button type="submit">Add Store</button>
-        </form>
+        <button type="submit" class="submit-button">Add Store</button>
+      </form>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Grocery Quest</p>
+    <footer class="footer">
+      <p class="footer__text">&copy; 2025 Grocery Quest</p>
     </footer>
-</body>
+  </body>
 </html>
