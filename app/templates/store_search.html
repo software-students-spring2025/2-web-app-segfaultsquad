@@ -3,17 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Food Search - Grocery Quest</title>
-    <link rel="stylesheet" href="../styles/css/styles.css" />
+    <title>Store Search - Grocery Quest</title>
+    <link rel="stylesheet" href="../../styles/css/styles.css" />
   </head>
   <body>
     <header class="header">
-      <h1 class="header__title">Search for Food Items</h1>
+      <h1 class="header__title">Explore Stores</h1>
       <nav class="nav">
         <a class="nav__link" href="{{ url_for('home') }}">Home</a>
-        <a class="nav__link" href="{{ url_for('store_search') }}"
-          >Explore Stores</a
-        >
+        <a class="nav__link" href="{{ url_for('store_search') }}">Explore</a>
         <a class="nav__link" href="{{ url_for('favorite_stores') }}"
           >Favorites</a
         >
@@ -25,10 +23,10 @@
       <section class="search-section">
         <input
           type="text"
-          id="food-search"
+          id="store-search"
           class="search-input"
-          placeholder="Search for food items..."
-          oninput="searchFood()"
+          placeholder="Search for stores..."
+          oninput="searchStores()"
         />
       </section>
 
@@ -40,11 +38,11 @@
         <h3 class="filter-form__title">Filter Results</h3>
         <form
           class="filter-form__content"
-          action="{{ url_for('food_search') }}"
+          action="{{ url_for('store_search') }}"
           method="GET"
         >
           <div class="form-group">
-            <label class="form-label" for="price_range">Price Range:</label>
+            <label class="form-label" for="price_range">Price Range</label>
             <input
               type="range"
               class="form-range"
@@ -57,7 +55,7 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="variety">Variety:</label>
+            <label class="form-label" for="variety">Variety</label>
             <input
               type="range"
               class="form-range"
@@ -71,7 +69,7 @@
 
           <div class="form-group">
             <label class="form-label" for="customer_service"
-              >Service Rating:</label
+              >Service Rating</label
             >
             <input
               type="range"
@@ -85,7 +83,7 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="distance">Distance (miles):</label>
+            <label class="form-label" for="distance">Distance (miles)</label>
             <input
               type="number"
               class="form-input"
@@ -101,19 +99,32 @@
         </form>
       </div>
 
-      <section class="food-list">
-        {% for food in food_items %}
-        <div class="food-card">
-          <h3 class="food-card__title">{{ food.name }}</h3>
-          <p class="food-card__detail">
-            <strong>Price:</strong> {{ food.price }}
-          </p>
-          <p class="food-card__detail">
-            <strong>Location:</strong> {{ food.store_name }}
-          </p>
+      <section class="store-list">
+        {% for store in stores %}
+        <div class="store-card">
+          <a
+            class="store-card__link"
+            href="{{ url_for('store_detail', store_id=store.id) }}"
+          >
+            <img
+              class="store-card__image"
+              src="{{ url_for('static', filename=store.image) }}"
+              alt="{{ store.name }}"
+            />
+            <div class="store-card__content">
+              <h3 class="store-card__title">{{ store.name }}</h3>
+              <p class="store-card__description">{{ store.description }}</p>
+            </div>
+          </a>
         </div>
         {% endfor %}
       </section>
+
+      <div class="cta-section">
+        <a href="{{ url_for('add_store') }}" class="cta-button">
+          Add New Store
+        </a>
+      </div>
     </main>
 
     <footer class="footer">
@@ -121,14 +132,14 @@
     </footer>
 
     <script>
-      function searchFood() {
-        let query = document.getElementById("food-search").value.toLowerCase();
-        let foodItems = document.querySelectorAll(".food-card");
-        foodItems.forEach((item) => {
-          let foodName = item
-            .querySelector(".food-card__title")
+      function searchStores() {
+        let query = document.getElementById("store-search").value.toLowerCase();
+        let stores = document.querySelectorAll(".store-card");
+        stores.forEach((store) => {
+          let storeName = store
+            .querySelector(".store-card__title")
             .textContent.toLowerCase();
-          item.style.display = foodName.includes(query) ? "" : "none";
+          store.style.display = storeName.includes(query) ? "" : "none";
         });
       }
 
