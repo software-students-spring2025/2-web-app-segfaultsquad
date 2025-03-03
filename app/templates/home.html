@@ -4,20 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home - Grocery Scout</title>
-    <link rel="stylesheet" href="../../styles/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/styles.css') }}">
   </head>
   <body>
     <header class="header">
       <h1 class="header__title">Welcome to Grocery Scout</h1>
       <nav class="nav">
-        <a class="nav__link" href="{{ url_for('home') }}">Home</a>
-        <a class="nav__link" href="{{ url_for('store_search') }}"
+        <a class="nav__link" href="{{ url_for('main.home') }}">Home</a>
+        <a class="nav__link" href="{{ url_for('main.store_search') }}"
           >Explore Stores</a
         >
-        <a class="nav__link" href="{{ url_for('favorite_stores') }}"
+        <a class="nav__link" href="{{ url_for('main.favorite_stores') }}"
           >Favorites</a
         >
-        <a class="nav__link" href="{{ url_for('logout') }}">Log Out</a>
+        <a class="nav__link" href="{{ url_for('main.logout') }}">Log Out</a>
       </nav>
     </header>
 
@@ -33,7 +33,7 @@
 
         <form
           class="guess-form"
-          action="{{ url_for('submit_guess') }}"
+          action="{{ url_for('main.submit_guess') }}"
           method="POST"
         >
           <div class="form-group">
@@ -55,7 +55,7 @@
 
       <section class="cta-section">
         <p class="cta-text">Ready to explore grocery stores?</p>
-        <a href="{{ url_for('store_list') }}" class="cta-button">
+        <a href="{{ url_for('main.store_list') }}" class="cta-button">
           Explore Stores
         </a>
       </section>

@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Store Search - Grocery Quest</title>
-    <link rel="stylesheet" href="../../styles/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/styles.css') }}">
   </head>
   <body>
     <header class="header">
       <h1 class="header__title">Explore Stores</h1>
       <nav class="nav">
-        <a class="nav__link" href="{{ url_for('home') }}">Home</a>
-        <a class="nav__link" href="{{ url_for('store_search') }}">Explore</a>
-        <a class="nav__link" href="{{ url_for('favorite_stores') }}"
+        <a class="nav__link" href="{{ url_for('main.home') }}">Home</a>
+        <a class="nav__link" href="{{ url_for('main.store_search') }}">Explore</a>
+        <a class="nav__link" href="{{ url_for('main.favorite_stores') }}"
           >Favorites</a
         >
-        <a class="nav__link" href="{{ url_for('logout') }}">Log Out</a>
+        <a class="nav__link" href="{{ url_for('main.logout') }}">Log Out</a>
       </nav>
     </header>
 
@@ -38,7 +38,7 @@
         <h3 class="filter-form__title">Filter Results</h3>
         <form
           class="filter-form__content"
-          action="{{ url_for('store_search') }}"
+          action="{{ url_for('main.store_search') }}"
           method="GET"
         >
           <div class="form-group">
@@ -104,11 +104,11 @@
         <div class="store-card">
           <a
             class="store-card__link"
-            href="{{ url_for('store_detail', store_id=store.id) }}"
+            href="{{ url_for('main.store_detail', store_id=store._id) }}"
           >
             <img
               class="store-card__image"
-              src="{{ url_for('static', filename=store.image) }}"
+              src="{{ store.image_url }}"
               alt="{{ store.name }}"
             />
             <div class="store-card__content">
@@ -121,7 +121,7 @@
       </section>
 
       <div class="cta-section">
-        <a href="{{ url_for('add_store') }}" class="cta-button">
+        <a href="{{ url_for('main.add_store') }}" class="cta-button">
           Add New Store
         </a>
       </div>
