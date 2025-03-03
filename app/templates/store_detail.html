@@ -4,20 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ store.name }} - Grocery Quest</title>
-    <link rel="stylesheet" href="../../styles/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/styles.css') }}">
   </head>
   <body>
     <header class="header">
       <h1 class="header__title">{{ store.name }}</h1>
       <nav class="nav">
-        <a class="nav__link" href="{{ url_for('home') }}">Home</a>
-        <a class="nav__link" href="{{ url_for('store_search') }}"
+        <a class="nav__link" href="{{ url_for('main.home') }}">Home</a>
+        <a class="nav__link" href="{{ url_for('main.store_search') }}"
           >Explore Stores</a
         >
-        <a class="nav__link" href="{{ url_for('favorite_stores') }}"
+        <a class="nav__link" href="{{ url_for('main.favorite_stores') }}"
           >Favorites</a
         >
-        <a class="nav__link" href="{{ url_for('logout') }}">Log Out</a>
+        <a class="nav__link" href="{{ url_for('main.logout') }}">Log Out</a>
       </nav>
     </header>
 
@@ -34,7 +34,7 @@
 
         <div class="cta-buttons">
           <a
-            href="{{ url_for('write_review', store_id=store.id) }}"
+            href="{{ url_for('main.write_review', store_id=store._id) }}"
             class="cta-button"
           >
             Write a Review
@@ -68,12 +68,12 @@
           {% if review.user_id == current_user.id %}
           <div class="review-actions">
             <a
-              href="{{ url_for('edit_review', store_id=store.id, review_id=review.id) }}"
+              href="{{ url_for('main.edit_review', store_id=store._id, review_id=review._id) }}"
               class="action-link"
               >Edit</a
             >
             <form
-              action="{{ url_for('delete_review', store_id=store.id, review_id=review.id) }}"
+              action="{{ url_for('main.delete_review', store_id=store._id, review_id=review._id) }}"
               method="POST"
               class="inline-form"
             >

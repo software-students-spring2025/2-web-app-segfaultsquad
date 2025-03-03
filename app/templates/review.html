@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Write a Review - Grocery Quest</title>
-    <link rel="stylesheet" href="../../styles/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/styles.css') }}">
   </head>
   <body>
     <header class="header">
@@ -12,17 +12,17 @@
       <nav class="nav">
         <a
           class="nav__link"
-          href="{{ url_for('store_detail', store_id=store_id) }}"
+          href="{{ url_for('main.store_detail', store_id=store_id) }}"
           >Back to Store</a
         >
-        <a class="nav__link" href="{{ url_for('logout') }}">Log Out</a>
+        <a class="nav__link" href="{{ url_for('main.logout') }}">Log Out</a>
       </nav>
     </header>
 
     <main class="main-content">
       <form
         class="review-form"
-        action="{{ url_for('write_review', store_id=store_id) }}"
+        action="{{ url_for('main.write_review', store_id=store_id) }}"
         method="POST"
       >
         <div class="form-group">

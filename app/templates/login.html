@@ -1,26 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <form method="POST">
-        <label>Username:</label><br>
-        <input type="text" name="username" required/><br>
-        <label>Password:</label><br>
-        <input type="password" name="password" required/><br>
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="{{ url_for('main.register') }}">Register here</a></p>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Grocery Scout</title>
+    <!-- Reference your main stylesheet -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Login to Grocery Scout</h1>
+      <nav class="nav">
+        <!-- Update these links to match your blueprint (e.g. 'main.home') -->
+        <a class="nav__link" href="{{ url_for('main.home') }}">Home</a>
+        <a class="nav__link" href="{{ url_for('main.store_search') }}"
+          >Explore Stores</a
+        >
+        <a class="nav__link" href="{{ url_for('main.favorite_stores') }}"
+          >Favorites</a
+        >
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <section class="auth-section">
+        <h2 class="section-title">Login</h2>
+        <!-- Display flashed messages (e.g., invalid credentials) -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" class="auth-form">
+          <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <button type="submit" class="submit-button">Login</button>
+        </form>
+
+        <p class="auth-switch">
+          Don't have an account?
+          <a href="{{ url_for('main.register') }}">Register here</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__text">&copy; 2025 Grocery Quest</p>
+    </footer>
+  </body>
 </html>

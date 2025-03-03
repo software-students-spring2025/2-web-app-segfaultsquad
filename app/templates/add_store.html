@@ -4,25 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add New Store - Grocery Quest</title>
-    <link rel="stylesheet" href="../../styles/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/styles.css') }}">
   </head>
   <body>
     <header class="header">
       <h1 class="header__title">Add a New Store</h1>
       <nav class="nav">
-        <a href="{{ url_for('home') }}" class="nav__link">Home</a>
-        <a href="{{ url_for('store_search') }}" class="nav__link">Explore</a>
-        <a href="{{ url_for('favorite_stores') }}" class="nav__link"
+        <a href="{{ url_for('main.home') }}" class="nav__link">Home</a>
+        <a href="{{ url_for('main.store_search') }}" class="nav__link">Explore</a>
+        <a href="{{ url_for('main.favorite_stores') }}" class="nav__link"
           >Favorites</a
         >
-        <a href="{{ url_for('logout') }}" class="nav__link">Log Out</a>
+        <a href="{{ url_for('main.logout') }}" class="nav__link">Log Out</a>
       </nav>
     </header>
 
     <main class="main-content">
       <form
         class="store-form"
-        action="{{ url_for('add_store') }}"
+        action="{{ url_for('main.add_store') }}"
         method="POST"
         enctype="multipart/form-data"
       >
