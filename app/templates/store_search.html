@@ -108,12 +108,78 @@
           >
             <img
               class="store-card__image"
-              src="{{ store.image_url }}"
-              alt="{{ store.name }}"
+              src="uploads/search-news-media.jpg"
+              alt="Wegmans"
             />
             <div class="store-card__content">
-              <h3 class="store-card__title">{{ store.name }}</h3>
-              <p class="store-card__description">{{ store.description }}</p>
+              <h3 class="store-card__title">Wegmans</h3>
+              <p class="store-card__description">Wegmans is a family-owned supermarket chain known for high-quality products, excellent customer service, and a wide selection of fresh produce, organic items, and prepared foods. Founded in 1916, it operates large stores with gourmet and everyday groceries, in-store restaurants, and bakery sections. Wegmans is highly regarded for its cleanliness, store layout, and focus on sustainability and community.</p>
+            </div>
+          </a>
+        </div>
+        <div class="store-card">
+          <a
+            class="store-card__link"
+            href="{{ url_for('main.store_detail', store_id=store._id) }}"
+          >
+            <img
+              class="store-card__image"
+              src="uploads/shoreview-minnesota-trader-joes-an-american-chain-of-news-photo-1726601353.jpg.avif"
+              alt="Trader Joes"
+            />
+            <div class="store-card__content">
+              <h3 class="store-card__title">Trader Joes</h3>
+              <p class="store-card__description">Trader Joe's is a popular American grocery store chain known for its unique selection of affordable, high-quality products, often under its own private label. Founded in 1958, it offers a variety of organic, international, and specialty foods, with a focus on healthy options and fun, quirky items. Trader Joe's is also recognized for its friendly customer service, distinctive store atmosphere, and commitment to sustainability. The stores are typically smaller, creating a more intimate and efficient shopping experience.</p>
+            </div>
+          </a>
+        </div>
+        <div class="store-card">
+          <a
+            class="store-card__link"
+            href="{{ url_for('main.store_detail', store_id=store._id) }}"
+          >
+            <img
+              class="store-card__image"
+              src="uploads/20230712_MGY_8714-scaled-2.jpg"
+              alt="Whole Foods"
+            />
+            <div class="store-card__content">
+              <h3 class="store-card__title">Whole Foods</h3>
+              <p class="store-card__description">Whole Foods Market is a high-end supermarket chain focused on offering organic, natural, and healthy food options. Founded in 1980, it is known for its commitment to quality, sustainability, and environmental responsibility. Whole Foods carries a wide range of organic produce, meat, dairy, and specialty products, with an emphasis on eco-friendly practices. The stores also feature prepared meals, bakery items, and wellness products. Acquired by Amazon in 2017, Whole Foods continues to cater to health-conscious consumers looking for premium, ethically sourced products.
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="store-card">
+          <a
+            class="store-card__link"
+            href="{{ url_for('main.store_detail', store_id=store._id) }}"
+          >
+            <img
+              class="store-card__image"
+              src="uploads/2023-04-04.jpg"
+              alt="Morton Williams"
+            />
+            <div class="store-card__content">
+              <h3 class="store-card__title">Morton Williams</h3>
+              <p class="store-card__description">Morton Williams is a family-owned supermarket chain primarily located in New York City. Established in 1952, it is known for offering a wide selection of fresh produce, meats, seafood, dairy, and prepared foods. The store focuses on providing high-quality products with a strong emphasis on customer service. Morton Williams caters to both everyday grocery needs and specialty items, and its stores typically offer a more personalized shopping experience compared to larger chains.</p>
+            </div>
+          </a>
+        </div>
+        <div class="store-card">
+          <a
+            class="store-card__link"
+            href="{{ url_for('main.store_detail', store_id=store._id) }}"
+          >
+            <img
+              class="store-card__image"
+              src="uploads/2020-04-21.jpg"
+              alt="Mulberry Market"
+            />
+            <div class="store-card__content">
+              <h3 class="store-card__title">Mulberry Market</h3>
+              <p class="store-card__description">Mulberry Market is a specialty grocery store located in the heart of New York City. Known for its high-quality, locally sourced products, the store offers a variety of fresh produce, gourmet items, and artisanal goods. It focuses on providing unique and premium products, catering to customers seeking a more curated, boutique shopping experience. Mulberry Market is particularly recognized for its emphasis on sustainability and supporting local producers.
+              </p>
             </div>
           </a>
         </div>
