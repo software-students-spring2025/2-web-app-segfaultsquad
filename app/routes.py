@@ -27,7 +27,7 @@ def register():
 
         # Hash the password before storing it
         hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-        db.users.insert_one({'username': username, 'password': hashed})
+        db.users.insert_one({'username': username, 'password': hashed, 'favorites': []})
 
         flash("Registration successful. Please log in.")
         return redirect(url_for('main.login'))
@@ -233,8 +233,22 @@ def edit_review(store_id, review_id):
 @main.route('/favorite_stores')
 @login_required
 def favorite_stores():
+    db = current_app.config['db']
+
     return render_template('favorites.html')
 
+@app.route('/store/<item_id>/add_to_favorites', methods=['POST'])
+# --------------------------------------------------------  TO DO
+@main.route('/add_to_favorites')
+@login_required
+def add_to_favorites(self, store_id):
+    db = current_app.config['db']
+    if store_id not in 
+    db.users.update_one(
+        {"favorites":}
+    )
+
+    return render_template('favorites.html')
 
 @main.route('/submit_guess', methods=['POST'])
 @login_required

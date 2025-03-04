@@ -9,6 +9,7 @@ class User(UserMixin):
         self.id = str(user_doc['_id'])
         self.username = user_doc['username']
         self.password = user_doc['password']
+        self.favorites = user_doc.get('favorites', [])
 
 
 def get_user_by_username(username, db):
