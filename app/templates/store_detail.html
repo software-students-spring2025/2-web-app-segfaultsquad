@@ -40,8 +40,12 @@
             Write a Review
           </a>
         </div>
+        <div class="cta-buttons">
+          <form action="{{ url_for('main.add_to_favorites', store_id=store._id) }}" method="POST">
+              <button type="submit" class="cta-button">Add to Favorites</button>
+          </form>
+        </div>
       </section>
-
       <section class="reviews-section">
         <h2 class="section-title">Customer Reviews</h2>
 
