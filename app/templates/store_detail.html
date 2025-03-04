@@ -42,14 +42,11 @@
         </div>
 
         <div class="cta-buttons">
-          <a
-            href="{{ url_for('main.write_review', store_id=store._id) }}"
-            class="cta-button"
-          >
-            Add to Favorites
-          </a>
+          <form action="{{ url_for('main.add_to_favorites', store_id=store._id) }}" method="POST">
+              <button type="submit" class="cta-button">Add to Favorites</button>
+          </form>
         </div>
-
+      
       </section>
 
       <section class="reviews-section">

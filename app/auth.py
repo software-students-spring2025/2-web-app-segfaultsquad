@@ -11,9 +11,13 @@ class User(UserMixin):
         self.password = user_doc['password']
         self.favorites = user_doc.get('favorites', [])
 
+    def get_id(self):
+        return str(self.id)
+
 
 def get_user_by_username(username, db):
     return db.users.find_one({'username': username})
+
 
 
 @login_manager.user_loader

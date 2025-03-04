@@ -11,11 +11,11 @@
       <h1 class="header__title">Your Favorite Stores</h1>
       <nav class="nav">
         <a class="nav__link" href="{{ url_for('main.home') }}">Home</a>
-        <a class="nav__link" href="{{ url_for('store_search') }}"
-          >Explore Stores</a
-        >
-        <a class="nav__link" href="{{ url_for('food_search') }}">Food Search</a>
-        <a class="nav__link" href="{{ url_for('logout') }}">Log Out</a>
+        <a class="nav__link" href="{{ url_for('main.store_search') }}">Explore</a>
+      <a class="nav__link" href="{{ url_for('main.favorite_stores') }}"
+        >Favorites</a
+      >
+        <a class="nav__link" href="{{ url_for('main.logout') }}">Log Out</a>
       </nav>
     </header>
 
@@ -23,12 +23,16 @@
       <section class="store-list">
         {% if favorite_stores %} {% for store in favorite_stores %}
         <div class="store-card">
-          <a
-            href="{{ url_for('store_detail', store_id=store.id) }}"
-            class="store-card__link"
+          <img
+            class="store-card__image"
+            src="{{ store.image_url }}"
+            alt="{{ store.name }}"
+          />
+          <h2 class="store-card__title">{{ store.name }}</h2>
+          <p class="store-card__description">{{ store.description }}</p>
+          <a href="{{ url_for('main.store_detail', store_id=store._id) }}"
+            >View Details</a
           >
-            <h3 class="store-card__title">{{ store.name }}</h3>
-          </a>
         </div>
         {% endfor %} {% else %}
         <p class="empty-state">
