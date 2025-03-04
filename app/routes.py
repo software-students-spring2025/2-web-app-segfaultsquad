@@ -250,12 +250,20 @@ def delete_review(store_id, review_id):
 @login_required
 def favorite_stores():
     db = current_app.config['db']
-    user = db.users.find_one({"_id": current_user.get_id()})
+    user_id = current_user.get_id()
+    user = db.users.find_one({"_id": ObjectId(user_id)})
+
     if user and "favorites" in user:
-        favorite_stores = list(db.stores.find({"_id": {"$in": user["favorites"]}}))
+        # Convert string IDs in favorites to ObjectIds
+        favorite_ids = [ObjectId(id) for id in user['favorites']]
+        favorite_stores = list(db.stores.find({"_id": {"$in": favorite_ids}}))
+        print("Favorite Stores Found:", favorite_stores)  # Debugging output
     else:
         favorite_stores = []
-    return render_template('favorites.html', favorite_stores = favorite_stores)
+        print("No favorites or user not found")  # Debugging output
+
+    return render_template('favorites.html', favorite_stores=favorite_stores)
+
 
 # --------------------------------------------------------  TO DO
 # @main.route('/add_to_favorites', methods=['POST'])
@@ -279,24 +287,27 @@ def favorite_stores():
 def add_to_favorites(store_id):
     db = current_app.config['db']
     
-    user = db.users.find_one({"_id": current_user.get_id()})
+    user_id = current_user.get_id()  # Assumed current_user.get_id() returns a string ID
+    store_obj_id = ObjectId(store_id)  # Convert store_id to ObjectId for MongoDB query
+
+    user = db.users.find_one({"_id": ObjectId(user_id)})
     
-    # Ensure 'favorites' exists and store isn't already favorited
     if not user:
         flash("User not found.", "error")
         return redirect(url_for('main.store_detail', store_id=store_id))
-    if "favorites" not in user:
-        db.users.update_one(
-            {"_id": user},
-            { "$set": { "favorites": [] } }
-        )
 
-    if store_id in user["favorites"]:
+    # Initialize favorites if not present
+    if "favorites" not in user:
+        user['favorites'] = []
+        db.users.update_one({"_id": ObjectId(user_id)}, {"$set": {"favorites": []}})
+
+    # Check if the store is already in favorites
+    if store_obj_id in user['favorites']:
         flash("Store already in favorites!", "info")
     else:
         db.users.update_one(
-            {"_id": current_user.get_id()},
-            {"$addToSet": {"favorites": store_id}}
+            {"_id": ObjectId(user_id)},
+            {"$addToSet": {"favorites": store_obj_id}}
         )
         flash("Store added to favorites successfully!", "success")
 
