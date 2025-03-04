@@ -53,7 +53,6 @@ cp .env.example .env
 ```bash
     MONGO_URI=your_mongodb_connection_string
     SECRET_KEY=your_secret_key
-    DEBUG=True
     UPLOAD_FOLDER=./uploads
     MAX_CONTENT_LENGTH=16777216
 ```
