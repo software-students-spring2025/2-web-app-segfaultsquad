@@ -56,46 +56,55 @@
 
     <script>
       let foods = [
-        { image: '/uploads/foods/apple.jpg', price: 1.99, averageGuess: 2.50 },
-        { image: '/uploads/foods/banana.jpg', price: 0.99, averageGuess: 1.20 },
-        { image: '/uploads/foods/broccoli.jpg', price: 2.49, averageGuess: 2.30 },
-        { image: '/uploads/foods/carrot.jpg', price: 1.49, averageGuess: 1.60 },
-        { image: '/uploads/foods/kale.jpg', price: 2.99, averageGuess: 2.75 },
-        { image: '/uploads/foods/potato.jpg', price: 3.49, averageGuess: 3.00 }
+        { image: "{{ url_for('static', filename='uploads/foods/apple.png') }}", price: 1.99, averageGuess: 2.10 },
+        { image: "{{ url_for('static', filename='uploads/foods/banana.png') }}", price: 0.59, averageGuess: 0.65 },
+        { image: "{{ url_for('static', filename='uploads/foods/broccoli.png') }}", price: 2.49, averageGuess: 2.75 },
+        { image: "{{ url_for('static', filename='uploads/foods/carrot.png') }}", price: 1.29, averageGuess: 1.40 },
+        { image: "{{ url_for('static', filename='uploads/foods/kale.png') }}", price: 3.99, averageGuess: 4.10 },
+        { image: "{{ url_for('static', filename='uploads/foods/potato.png') }}", price: 1.50, averageGuess: 1.60 }
       ];
-
-      // Randomly select a food item and display it
+    
+      // Randomly select a food item
       let randomFood = foods[Math.floor(Math.random() * foods.length)];
+    
+      // Set the food image
       document.getElementById('food-image').src = randomFood.image;
-
-      // Handle form submission and display result
+    
+      // Handle form submission
       document.getElementById('guess-form').addEventListener('submit', function(event) {
         event.preventDefault();
-
+    
         let userGuess = parseFloat(document.getElementById('guess').value);
         let actualPrice = randomFood.price;
         let averageGuess = randomFood.averageGuess;
-
+    
         let resultMessage = document.getElementById('result');
         let communityAvgMessage = document.getElementById('community-avg');
-
-        // Display the result of the user's guess
-        if (userGuess === actualPrice) {
-          resultMessage.textContent = `Correct! The price is $${actualPrice.toFixed(2)}.`;
-        } else if (userGuess < actualPrice) {
-          resultMessage.textContent = `Too low! The price is $${actualPrice.toFixed(2)}.`;
-        } else {
-          resultMessage.textContent = `Too high! The price is $${actualPrice.toFixed(2)}.`;
+    
+        // Check if userGuess is valid
+        if (isNaN(userGuess)) {
+          resultMessage.textContent = "Please enter a valid number.";
+          return;
         }
-
-        communityAvgMessage.textContent = `Average community guess: $${averageGuess.toFixed(2)}`;
+    
+        // Display the result of the user's guess
+        if (userGuess.toFixed(2) === actualPrice.toFixed(2)) {
+          resultMessage.textContent = `✅ Correct! The price is $${actualPrice.toFixed(2)}.`;
+        } else if (userGuess < actualPrice) {
+          resultMessage.textContent = `⬆️ Too low! The price is $${actualPrice.toFixed(2)}.`;
+        } else {
+          resultMessage.textContent = `⬇️ Too high! The price is $${actualPrice.toFixed(2)}.`;
+        }
+    
+        // Show the community average guess
+        communityAvgMessage.textContent = `📊 Average community guess: $${averageGuess.toFixed(2)}`;
         communityAvgMessage.style.display = 'block';
       });
     </script>
+    
 
     <footer class="footer">
       <p class="footer__text">&copy; 2025 Grocery Quest</p>
     </footer>
   </body>
 </html>
-
