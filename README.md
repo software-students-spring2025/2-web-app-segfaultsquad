@@ -11,7 +11,6 @@ A little exercise to build a web application following an agile development proc
 Price Guessing Game
 - As a user, I want to guess the prices of grocery items so that I can test my knowledge and improve my budgeting skills.
 - As a user, I want to see the actual price of an item after guessing so that I can compare my estimate to the real cost.
-- As a user, I want to track my past guesses and accuracy over time so that I can measure my improvement.
 - As a user, I want to see average price estimates from other users so that I can compare my guesses with the community.
 
 Grocery Store Listings & Reviews
@@ -29,7 +28,52 @@ User Interaction & Personalization
 
 ## Steps necessary to run the software
 
-See instructions. Delete this line and place instructions to download, configure, and run the software here.
+#### Prerequisites
+
+- Python 3.11 or higher (if not using Docker for local development)
+- Docker and Docker Compose installed
+
+#### Clone the repository:
+
+Clone the repository to your local machine:
+```bash
+git clone <https://github.com/software-students-spring2025/2-web-app-segfaultsquad.git> <your_dirname>
+```
+
+
+#### Set up the virtual environment
+
+1. Create a .env under the root directory:
+
+
+2. Or create a .env file in the root directory with the following content:
+```bash
+    // We have configure docker mockdb, when start with docker
+    // docker will setup a mockdb, and you can specify the mockdb connection here
+    MONGO_URI=your_mongodb_connection_string
+    SECRET_KEY=your_secret_key
+<<<<<<< HEAD
+    UPLOAD_FOLDER=./uploads
+    MAX_CONTENT_LENGTH=16777216
+=======
+>>>>>>> eb287c96a4766f482dc2c63c687530becb32e856
+```
+
+#### Set up Docker
+1. Build and start the containers using Docker Compose 
+```bash
+docker-compose up --build
+```
+#### Access the application
+Once the containers are up and running, you can access the application at: http://localhost:5050
+
+
+#### Stopping the application
+```bash
+docker-compose down
+```
+
+
 
 ## Task boards
 

@@ -11,12 +11,8 @@
       <h1 class="header__title">Welcome to Grocery Scout</h1>
       <nav class="nav">
         <a class="nav__link" href="{{ url_for('main.home') }}">Home</a>
-        <a class="nav__link" href="{{ url_for('main.store_search') }}"
-          >Explore Stores</a
-        >
-        <a class="nav__link" href="{{ url_for('main.favorite_stores') }}"
-          >Favorites</a
-        >
+        <a class="nav__link" href="{{ url_for('main.store_search') }}">Explore Stores</a>
+        <a class="nav__link" href="{{ url_for('main.favorite_stores') }}">Favorites</a>
         <a class="nav__link" href="{{ url_for('main.logout') }}">Log Out</a>
       </nav>
     </header>
@@ -24,16 +20,12 @@
     <main class="main-content">
       <section class="game-section">
         <h2 class="section-title">Guess the Price of This Item</h2>
-        <img
-          class="food-image"
-          src="{{ url_for('static', filename='images/food_item.jpg') }}"
-          alt="Food Item Image"
-        />
+        <img class="food-image" id="food-image" src="" alt="Food Item Image" />
         <p class="game-prompt">How much do you think this item costs?</p>
 
         <form
           class="guess-form"
-          action="{{ url_for('main.submit_guess') }}"
+          id="guess-form"
           method="POST"
         >
           <div class="form-group">
@@ -51,18 +43,59 @@
         </form>
 
         <p class="result-message" id="result"></p>
+
+        <!-- Community average guess initially hidden -->
+        <p class="community-avg-message" id="community-avg" style="display: none;">Average community guess: $2.50</p>
       </section>
 
       <section class="cta-section">
         <p class="cta-text">Ready to explore grocery stores?</p>
-        <a href="{{ url_for('main.store_list') }}" class="cta-button">
-          Explore Stores
-        </a>
+        <a href="{{ url_for('main.store_list') }}" class="cta-button">Explore Stores</a>
       </section>
     </main>
+
+    <script>
+      let foods = [
+        { image: '/uploads/foods/apple.jpg', price: 1.99, averageGuess: 2.50 },
+        { image: '/uploads/foods/banana.jpg', price: 0.99, averageGuess: 1.20 },
+        { image: '/uploads/foods/broccoli.jpg', price: 2.49, averageGuess: 2.30 },
+        { image: '/uploads/foods/carrot.jpg', price: 1.49, averageGuess: 1.60 },
+        { image: '/uploads/foods/kale.jpg', price: 2.99, averageGuess: 2.75 },
+        { image: '/uploads/foods/potato.jpg', price: 3.49, averageGuess: 3.00 }
+      ];
+
+      // Randomly select a food item and display it
+      let randomFood = foods[Math.floor(Math.random() * foods.length)];
+      document.getElementById('food-image').src = randomFood.image;
+
+      // Handle form submission and display result
+      document.getElementById('guess-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let userGuess = parseFloat(document.getElementById('guess').value);
+        let actualPrice = randomFood.price;
+        let averageGuess = randomFood.averageGuess;
+
+        let resultMessage = document.getElementById('result');
+        let communityAvgMessage = document.getElementById('community-avg');
+
+        // Display the result of the user's guess
+        if (userGuess === actualPrice) {
+          resultMessage.textContent = `Correct! The price is $${actualPrice.toFixed(2)}.`;
+        } else if (userGuess < actualPrice) {
+          resultMessage.textContent = `Too low! The price is $${actualPrice.toFixed(2)}.`;
+        } else {
+          resultMessage.textContent = `Too high! The price is $${actualPrice.toFixed(2)}.`;
+        }
+
+        communityAvgMessage.textContent = `Average community guess: $${averageGuess.toFixed(2)}`;
+        communityAvgMessage.style.display = 'block';
+      });
+    </script>
 
     <footer class="footer">
       <p class="footer__text">&copy; 2025 Grocery Quest</p>
     </footer>
   </body>
 </html>
+

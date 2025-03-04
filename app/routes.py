@@ -230,6 +230,22 @@ def edit_review(store_id, review_id):
     return render_template('edit.html', store_id=store_id, review=review_doc)
 
 
+@main.route('/delete_review/<store_id>/<review_id>', methods=['POST'])
+@login_required
+def delete_review(store_id, review_id):
+    db = current_app.config['db']
+
+    # Attempt to delete the review from the database
+    result = db.reviews.delete_one({"_id": ObjectId(review_id)})
+
+    if result.deleted_count > 0:
+        flash("Review deleted successfully!")
+    else:
+        flash("Review not found or could not be deleted.")
+
+    return redirect(url_for('main.store_detail', store_id=store_id))
+
+
 # --------------------------------------------------------  TO DO
 @main.route('/favorite_stores')
 @login_required
@@ -294,10 +310,7 @@ def submit_guess():
     return redirect(url_for('main.home'))
 
 
-@main.route('/delete_review/<store_id>/<review_id>', methods=['POST'])
-@login_required
-def delete_review(store_id, review_id):
-    return redirect(url_for('main.store_detail', store_id=store_id))
+
 
 
 
