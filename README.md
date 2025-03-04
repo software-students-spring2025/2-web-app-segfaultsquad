@@ -31,39 +31,42 @@ User Interaction & Personalization
 #### Prerequisites
 
 - Python 3.11 or higher (if not using Docker for local development)
-- MongoDB Atlas account
 - Docker and Docker Compose installed
 
 #### Clone the repository:
 
 Clone the repository to your local machine:
 ```bash
-git clone <https://github.com/software-students-spring2025/2-web-app-segfaultsquad.git>
+git clone <https://github.com/software-students-spring2025/2-web-app-segfaultsquad.git> <your_dirname>
 ```
 
 
 #### Set up the virtual environment
 
-1. Copy the example .env file:
-```bash
-cp .env.example .env
-```
+1. Create a .env under the root directory:
+
 
 2. Or create a .env file in the root directory with the following content:
 ```bash
+    // We have configure docker mockdb, when start with docker
+    // docker will setup a mockdb, and you can specify the mockdb connection here
     MONGO_URI=your_mongodb_connection_string
     SECRET_KEY=your_secret_key
+<<<<<<< HEAD
     UPLOAD_FOLDER=./uploads
     MAX_CONTENT_LENGTH=16777216
+=======
+>>>>>>> eb287c96a4766f482dc2c63c687530becb32e856
 ```
 
 #### Set up Docker
-1. Build and start the containers using Docker Compose
+1. Build and start the containers using Docker Compose 
 ```bash
 docker-compose up --build
 ```
 #### Access the application
 Once the containers are up and running, you can access the application at: http://localhost:5050
+
 
 #### Stopping the application
 ```bash
